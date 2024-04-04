@@ -1,43 +1,38 @@
-# My API
+# Zuplo API Specification
 
-You can write full markdown in these documents. Syntax highlighting and full
-Github Flavored markdown are supported. To learn more about customizing the
-documentation of this developer portal
-[see the documentation](https://zuplo.com/docs/developer-portal/adding-pages).
+## Overview
 
-```ts
-const response = await fetch("https://echo.zuplo.io", {
-  headers: {
-    "content-type": "application/json",
-  },
-});
+The Zuplo API allows users to interact with various functionalities of the system. Below is a summary of the available endpoints and their corresponding operations.
 
-const data = await response.json();
-console.log(data);
-```
+## Endpoints
 
-## Labore et Dolore
+### /todos
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-culpa qui officia deserunt mollit anim id est laborum.
+- **Summary:** Get all todos API
+- **Description:** First GET API on Zuplo
+- **Route Configuration:**
+  - **CORS Policy:** none
+  - **Handler:**
+    - **Export:** urlForwardHandler
+    - **Module:** `$import(@zuplo/runtime)`
+    - **Options:**
+      - `baseUrl`: `${env.BASE_URL}`
+  - **Policies:**
+    - **Inbound:**
+      - api-key-inbound
+      - rate-limit-inbound
+      - set-headers-inbound
+- **Operation ID:** b82cf4bc-94dd-495d-b945-fcecb0bad38e
+- **Internal:** false
 
-| Item            | Description                                  | Quanity |
-| --------------- | -------------------------------------------- | ------- |
-| ullamco laboris | reprehenderit in voluptate velit esse cillum | 21      |
-| Excepteur sint  | tempor incididunt ut labore                  | 1       |
-| anim id est     | irure dolor in reprehenderit in voluptate    | 82      |
-| non proiden     | cupidatat non proident, sunt in              | 53      |
+## TypeScript Interface
 
-## Aliquip pariatur
+```typescript
+export type Root = Root2[];
 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-deserunt mollit anim id est laborum.
-
-- **Item 1** - ullamco laboris nisi ut aliquip ex ea commodo
-- **Item 2** - ullamco laboris nisi ut aliquip ex ea commodo
-- **Item 3** - ullamco laboris nisi ut aliquip ex ea commodo
-- **Item 4** - ullamco laboris nisi ut aliquip ex ea commodo
+export interface Root2 {
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
+}
